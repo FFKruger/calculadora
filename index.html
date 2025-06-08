@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Calculadora Simples</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #calculadora {
+      max-width: 300px;
+      margin: auto;
+    }
+    input[type="number"] {
+      width: 45%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+    select {
+      width: 100%;
+      padding: 10px;
+      margin: 5px 0;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+    }
+    #resultado {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div id="calculadora">
+    <h2>Calculadora Simples</h2>
+    <input type="number" id="num1" placeholder="Número 1" />
+    <input type="number" id="num2" placeholder="Número 2" />
+    <select id="operacao">
+      <option value="somar">Somar (+)</option>
+      <option value="subtrair">Subtrair (-)</option>
+      <option value="multiplicar">Multiplicar (×)</option>
+      <option value="dividir">Dividir (÷)</option>
+    </select>
+    <button id="calcular">Calcular</button>
+    <div id="resultado"></div>
+  </div>
+
+  <script>
+    // Aqui vai o código JavaScript
+    document.getElementById('calcular').addEventListener('click', function() {
+      const num1 = parseFloat(document.getElementById('num1').value);
+      const num2 = parseFloat(document.getElementById('num2').value);
+      const operacao = document.getElementById('operacao').value;
+      const resultadoDiv = document.getElementById('resultado');
+
+      if (isNaN(num1) || isNaN(num2)) {
+        resultadoDiv.textContent = 'Por favor, insira números válidos.';
+        return;
+      }
+
+      let resultado;
+      switch (operacao) {
+        case 'somar':
+          resultado = num1 + num2;
+          break;
+        case 'subtrair':
+          resultado = num1 - num2;
+          break;
+        case 'multiplicar':
+          resultado = num1 * num2;
+          break;
+        case 'dividir':
+          if (num2 === 0) {
+            resultadoDiv.textContent = 'Erro: divisão por zero.';
+            return;
+          }
+          resultado = num1 / num2;
+          break;
+        default:
+          resultadoDiv.textContent = 'Operação inválida.';
+          return;
+      }
+
+      resultadoDiv.textContent = 'Resultado: ' + resultado;
+    });
+  </script>
+</body>
+</html>
